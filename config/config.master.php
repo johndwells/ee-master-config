@@ -155,6 +155,31 @@ if (isset($config))
 
 
 	/**
+	 * ON-THE-FLY DEBUG
+	 * 
+	 * You can debugging turn on (or off) on demand by placing "?debug" into the URL.
+	 * Note that if you have removed the index.php file via mod_rewrite,
+	 * you will need to include it in the URL for $_GET to be properly set.
+	 *
+	 * First we use our current environment ENV_DEBUG value;
+	 * then we see if we have an override value in $_GET.
+	 *
+	 * Default value for override is TRUE.
+	 * Only the following evaluate to FALSE (case insensitive):
+	 * ?debug=0
+	 * ?debug=false
+	 * ?debug=off
+	 * ?debug=no
+	 * ?debug=n
+	 */
+	$env_config['debug'] = ENV_DEBUG;
+	if(array_key_exists('debug', $_GET))
+	{
+		$env_config['debug'] = preg_match('/0|false|off|no|n/i', $_GET['debug']) ? FALSE : TRUE;
+	}
+
+
+	/**
 	 * Debugging settings
 	 * 
 	 * These settings are helpful to have in one place
@@ -162,19 +187,21 @@ if (isset($config))
 	 */
 	$env_config['is_system_on']         = 'y';
 	$env_config['allow_extensions']     = 'y';
-	$env_config['email_debug']          = (ENV_DEBUG) ? 'y' : 'n' ;
+	$env_config['email_debug']          = ($env_config['debug']) ? 'y' : 'n' ;
 	// If we're not in production show the profile on the front-end but not in the CP
-	$env_config['show_profiler']        = ( ! ENV_DEBUG OR (isset($_GET['D']) && $_GET['D'] == 'cp')) ? 'n' : 'y' ;
+	$env_config['show_profiler']        = ( ! $env_config['debug'] OR (isset($_GET['D']) && $_GET['D'] == 'cp')) ? 'n' : 'y' ;
 	// Show template debugging if we're not in production
-	$env_config['template_debugging']   = (ENV_DEBUG) ? 'y' : 'n' ;
+	$env_config['template_debugging']   = ($env_config['debug']) ? 'y' : 'n' ;
+
 	/**
+	 * Cast debug back from BOOLean to numerical.
 	 * Set debug to '2' if we're in dev mode, otherwise just '1'
 	 * 
 	 * 0: no PHP/SQL errors shown
 	 * 1: Errors shown to Super Admins
 	 * 2: Errors shown to everyone
 	 */
-	$env_config['debug']                = (ENV_DEBUG) ? '2' : '1' ;
+	$env_config['debug']                = ($env_config['debug']) ? '2' : '1' ;
 
 
 
