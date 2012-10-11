@@ -105,6 +105,7 @@ if (isset($config))
 	$env_config['theme_folder_path']   = $base_path   . '/themes/';
 	$env_config['theme_folder_url']    = $base_url    . '/themes/';
 	$env_config['emoticon_path']       = $images_url  . '/smileys/';
+	$env_config['emoticon_url']        = $images_url  . '/smileys/';
 	$env_config['captcha_path']        = $images_path . '/captchas/';
 	$env_config['captcha_url']         = $images_url  . '/captchas/';
 	$env_config['avatar_path']         = $images_path . '/avatars/';
@@ -241,7 +242,7 @@ if (isset($config))
 	 * Other system settings
 	 */
 	$env_config['new_version_check']        = 'n'; // no slowing my CP homepage down with this
-	$env_config['daylight_savings']         = date('I') ? 'y' : 'n'; // Autodetect DST
+	$env_config['daylight_savings']         = ((bool) date('I')) ? 'y' : 'n'; // Autodetect DST
 	$env_config['use_category_name']        = 'y';
 	$env_config['reserved_category_word']   = 'category';
 	$env_config['word_separator']           = 'dash'; // dash|underscore
