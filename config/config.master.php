@@ -259,7 +259,7 @@ if (isset($config))
 	 * @see config/config.stage.php
 	 * @see config/config.prod.php
 	 */
-	require $_SERVER['DOCUMENT_ROOT'] . '/../config/config.' . ENV . '.php';
+	require 'config.' . ENV . '.php';
 
 
 
