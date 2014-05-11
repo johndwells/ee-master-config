@@ -143,6 +143,15 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../config/config.master.php';
 * Replace the contents of your @system/expressionengine/config/database.php@ file with the contents in of the same file in this repository
 
 
+h3. Above webroot vs within webroot
+
+The instructions above are for setting up the config *above* webroot (your "public_html", "htdocs", etc directory). This is recommended for security. However, if you're unable to do this due to hosting restraints you can find the necessary changes to support this "on StackExchange.":http://expressionengine.stackexchange.com/questions/13731/focus-labs-ee-master-config-under-webroot
+
+h3. MSM Support
+
+MSM is a tricky one due to the variety of ways the server directory structure can be setup. We recommend keeping each site's "public" directory siblings to one another, so the relative paths are all identical and accurate. Alternatively, you can define paths in each site's @index.php@ file as recommended in this gist: https://gist.github.com/d27570a3e52bdf656f54.
+
+
 h2. Contributions
 
 If you're interested in making this better please feel free to "fork":http://help.github.com/fork-a-repo/ the code "on GitHub":https://github.com/focuslabllc/ee-master-config and send "pull requests":http://help.github.com/send-pull-requests/. Also, we'd love to track any potential issues through the repository's "Issues tracker":https://github.com/focuslabllc/ee-master-config/issues.
